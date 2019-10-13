@@ -11,12 +11,16 @@ import socket
 import ssl
 import json
 import time
+import logging 
+
+
 
 
 def saveJsonTotxtFile():
     outfile = open('jsonPayload.json', 'w')
     json.dump(getJsonPayload(), outfile)
     outfile.close()
+    logging.info('JSON Object is converted to Text File') 
 
 
 def sendJsontoApp2(JsonToSend):
@@ -30,10 +34,13 @@ def sendJsontoApp2(JsonToSend):
         ssl_sock.connect(('localhost', 8080))
 
         ssl_sock.send(bytes(JsonToSend, "utf-8"))
+	logging.info('Object sent to Application 2') 
     except Exception as e:
         print(e)
         print(ssl_sock.cipher())
+	logging.error('Exception has been thrown')
     ssl_sock.close()
+   
 
 
 # Time Stamp Methods
