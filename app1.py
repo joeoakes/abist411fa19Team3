@@ -51,8 +51,12 @@ def getTimeAsTuple():
 
 def getJsonPayload():
     jsonString = """{"name": "Dylan","lastName": "Palaia","age": 25,"graduated": true, "balance": null}"""
+      while True:
+        print("accept connections from outside")
+        (c_ssl, address) = ssl_sock.accept()
+        jsonPayload = c_ssl.recv(157778)
+        print("json payload received: ", jsonPayload)
     
- 
     return jsonString
 
 
