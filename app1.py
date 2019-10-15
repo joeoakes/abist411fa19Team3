@@ -10,6 +10,9 @@ import calendar
 import socket
 import ssl
 import json
+import curl
+import urllib.parse
+import urllib.request
 import time
 import logging 
 
@@ -51,11 +54,20 @@ def getTimeAsTuple():
 
 def getJsonPayload():
     jsonString = """{"name": "Dylan","lastName": "Palaia","age": 25,"graduated": true, "balance": null}"""
-    while True:
-       print("accept connections from outside")
-       (c_ssl, address) = ssl_sock.accept()
-       jsonPayload = c_ssl.recv(157778)
-       print("json payload received: ", jsonPayload)
+   
+    try:
+    from io import BytesIO
+
+    print('Url: ', url + param)
+    response=urllib.request.urlopen(url + param)
+    JsonPayload=response.read()
+    print('Payload: ', JsonPayload)
+
+except ImportError:
+    from StringIO import StringIO as BytesIO
+    e = sys.exc_info()[0]
+    print("error: %s" % e)
+	
 
     return jsonString
 
