@@ -59,8 +59,8 @@ def getJsonPayload():
     	from io import BytesIO
 
     	print('Url: ', url + param)
-   	response=urllib.request.urlopen(url + param)
-    	JsonPayload=response.read()
+   	response = urllib.request.urlopen(url + param)
+    	JsonPayload = response.read()
     	print('Payload: ', JsonPayload)
 
    except ImportError:
