@@ -56,8 +56,8 @@ def getJsonPayload():
     jsonString = """{"name": "Dylan","lastName": "Palaia","age": 25,"graduated": true, "balance": null}"""
    
     print('https://jsonplaceholder.typicode.com/posts/1')
-    url='https://jsonplaceholder.typicode.com'
-    param='/posts/1'	
+    url = 'https://jsonplaceholder.typicode.com'
+    param = '/posts/1'	
 
     try:
     	from io import BytesIO
