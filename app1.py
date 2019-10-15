@@ -56,20 +56,19 @@ def getJsonPayload():
     jsonString = """{"name": "Dylan","lastName": "Palaia","age": 25,"graduated": true, "balance": null}"""
    
     try:
-    from io import BytesIO
+    	from io import BytesIO
 
-    print('Url: ', url + param)
-    response=urllib.request.urlopen(url + param)
-    JsonPayload=response.read()
-    print('Payload: ', JsonPayload)
+    	print('Url: ', url + param)
+   	response=urllib.request.urlopen(url + param)
+    	JsonPayload=response.read()
+    	print('Payload: ', JsonPayload)
 
-except ImportError:
-    from StringIO import StringIO as BytesIO
-    e = sys.exc_info()[0]
-    print("error: %s" % e)
+   except ImportError:
+    	from StringIO import StringIO as BytesIO
+    	e = sys.exc_info()[0]
+    	print("error: %s" % e)
 	
-
-    return jsonString
+   return jsonString
 
 
 def comparetimes(timeIntSeconds):
