@@ -1,11 +1,11 @@
 import socket
 import ssl
 import json
-import logging 
+import logging
 
-logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+# logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
-logging('App2 has begun')
+# logging('App2 has begun')
 
 try:
     print("create an INET, STREAMing socket using SSL")
@@ -26,12 +26,12 @@ try:
         print("Message received")
         print(message)
 
-	logging.info('Message has been recieved by app2')
+        logging.info('Message has been recieved by app2')
         strJson = message.decode("utf-8")
         print(strJson)
-	
+
 except Exception as e:
     print(e)
     ssl_sock.close()
 
-logging.info('App2 has ended')
+# logging.info('App2 has ended')

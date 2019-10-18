@@ -77,6 +77,18 @@ def getJsonPayload():
     return jsonString
 
 
+# Replacement for curl method
+def getJsonPayloadtwo():
+    try:
+        url = 'https://jsonplaceholder.typicode.com'
+        param = '/posts/1'
+        response = urllib.request.urlopen(url + param)
+        payLoad = response.read()
+    except Exception as e:
+        print(e)
+    return payLoad
+
+
 # ======================Below are several time related functions================
 # Description: A tuple is similar to a list of values.
 # Its needed here because a tuple is required to get the time stamp as seconds
@@ -122,10 +134,10 @@ def formatDateToHumanReadable():
 # Returns: None
 try:
     # Save the Payload to a file.
-    saveJsonTotxtFile()
+    # saveJsonTotxtFile()
 
     # Convert the string received by CURL to a Python Object
-    jsonObject = json.loads(getJsonPayload())
+    jsonObject = json.loads(getJsonPayloadtwo())
 
     # Add the time stamp in seconds to the JSON object.
     jsonObject['date'] = gettimeinSeconds()
@@ -141,3 +153,4 @@ try:
 
 except Exception as e:
     print(e)
+
