@@ -1,15 +1,18 @@
 import logging
+from logging.config import fileConfig
 from pymongo import MongoClient
+import sys
+import pdb 
 
 
 
 logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
 
-logMessages = logging.listen
+logMessages = logging.config.listen()
 
 
-
+pdb.set_trace()
 
 
 try:  
