@@ -7,7 +7,7 @@ import logging
 
 # logging('App2 has begun')
 
-def getLoggingForApp2(): 
+def getJsonFromApp1(): 
   try:
     print("create an INET, STREAMing socket using SSL")
     diamondSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
