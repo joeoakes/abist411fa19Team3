@@ -78,9 +78,9 @@ def getJsonPayload():
        	jsonObj = outFile.write(json.dumps(url))
             
 
-	with open('curlApp1.json', 'r') as json_data:
-		pyObj = json.load(json_data)
-		print(repr(pyObj))
+    with open('curlApp1.json', 'r') as json_data:
+	 pyObj = json.load(json_data)
+	 print(repr(pyObj))
 
     return jsonString
 
