@@ -7,7 +7,8 @@ import logging
 
 # logging('App2 has begun')
 
-try:
+def getLoggingForApp2(): 
+  try:
     print("create an INET, STREAMing socket using SSL")
     diamondSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     ssl_sock = ssl.wrap_socket(diamondSock,
