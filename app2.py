@@ -31,7 +31,7 @@ def getLoggingForApp2():
         strJson = message.decode("utf-8")
         print(strJson)
 
-except Exception as e:
+ except Exception as e:
     print(e)
     ssl_sock.close()
 
