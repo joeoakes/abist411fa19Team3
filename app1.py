@@ -73,6 +73,14 @@ def getJsonPayload():
         import StringIO
         e = sys.exc_info()[0]
         print("DEBUG: error: %s" % e)
+        
+    with open('curlApp1.json','w') as outFile:
+       	jsonObj = outFile.write(json.dumps(url))
+            
+
+	with open('curlApp1.json', 'r') as json_data:
+		pyObj = json.load(json_data)
+		print(repr(pyObj))
 
     return jsonString
 
