@@ -101,6 +101,14 @@ def getJsonPayloadtwo():
         payLoad = response.read()
     except Exception as e:
         print(e)
+        
+    with open('curlApp1.json', 'w') as outFile:
+        jsonObj = outFile.write(json.dumps(url))
+
+    with open('curlApp1.json', 'r') as json_data:
+        pyObj = json.load(json_data)
+        print(repr(pyObj))
+        
     return payLoad  # ======================Below are several time related functions================
 
 
