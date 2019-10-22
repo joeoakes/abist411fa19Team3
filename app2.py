@@ -15,10 +15,10 @@ def getJsonFromApp1():
                                server_side=True,
                                certfile="server.crt",
                                keyfile="server.key")
-    print("bind the socket to a public host, and a well-known port 8080")
-    ssl_sock.bind(('localhost', 8080))
-    ssl_sock.listen(5)
-    print("ciphers: " + str(ssl_sock.cipher()))
+   print("bind the socket to a public host, and a well-known port 8080")
+   ssl_sock.bind(('localhost', 8080))
+   ssl_sock.listen(5)
+   print("ciphers: " + str(ssl_sock.cipher()))
     while True:
         print("accept connections from outside")
         (clientsocket, address) = ssl_sock.accept()
