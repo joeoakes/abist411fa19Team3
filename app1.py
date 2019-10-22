@@ -63,7 +63,7 @@ def sendJsontoApp2(JsonToSend):
 def getJsonPayload():
     jsonString = """{"name": "Dylan","lastName": "Palaia","age": 25,"graduated": true, "balance": null}"""
 
-    url = 'https://jsonplaceholder.typicode.com'
+    url = 'https://jsonplaceholder.typicode.com/posts/1/comments'
     param = '/posts/1'
 
 
