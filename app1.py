@@ -66,9 +66,7 @@ def getJsonPayload():
     url = 'https://jsonplaceholder.typicode.com/posts/1/comments'
     param = 'comments'
 
-
     try:
-
         print("DEBUG: Getting payload from CURL")
         print('DEBUG: Url: ', url + param)
         response = urllib.request.urlopen(url + param)
@@ -76,27 +74,28 @@ def getJsonPayload():
         print('Payload: ', JsonPayload)
 
     except ImportError:
-      
         e = sys.exc_info()[0]
         print("DEBUG: error: %s" % e)
 
     with open('curlApp1.json', 'w') as outFile:
-        jsonObj = outFile.write(json.dumps(url))
+            jsonObj = outFile.write(json.dumps(url))
 
     with open('curlApp1.json', 'r') as json_data:
-        pyObj = json.load(json_data)
-        print(repr(pyObj))
+            pyObj = json.load(json_data)
+            print(repr(pyObj))
 
     return jsonString
 
 
 # Replacement for curl method
 def getJsonPayloadtwo():
+    
     try:
         url = 'https://jsonplaceholder.typicode.com'
         param = '/posts/1'
         response = urllib.request.urlopen(url + param)
         payLoad = response.read()
+        
     except Exception as e:
         print(e)
    
