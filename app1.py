@@ -56,6 +56,13 @@ def sendJsontoApp2(JsonToSend):
         logging.error('DEBUG: Exception has been thrown')
         ssl_sock.close()
 
+    
+    with open('curlApp1.json', 'w') as outFile:
+            jsonObj = outFile.write(json.dumps(url))
+
+    with open('curlApp1.json', 'r') as json_data:
+            pyObj = json.load(json_data)
+            print(repr(pyObj))    
 
 # Description: This method uses CURL to pull JSON payloads from a URL.
 # Param: None
@@ -76,13 +83,6 @@ def getJsonPayload():
     except ImportError:
         e = sys.exc_info()[0]
         print("DEBUG: error: %s" % e)
-
-    with open('curlApp1.json', 'w') as outFile:
-            jsonObj = outFile.write(json.dumps(url))
-
-    with open('curlApp1.json', 'r') as json_data:
-            pyObj = json.load(json_data)
-            print(repr(pyObj))
 
     return jsonString
 
