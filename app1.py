@@ -68,7 +68,6 @@ def getJsonPayload():
 
 
     try:
-        from io import BytesIO
 
         print("DEBUG: Getting payload from CURL")
         print('DEBUG: Url: ', url + param)
@@ -77,8 +76,7 @@ def getJsonPayload():
         print('Payload: ', JsonPayload)
 
     except ImportError:
-        import StringIO
-
+      
         e = sys.exc_info()[0]
         print("DEBUG: error: %s" % e)
 
