@@ -13,12 +13,12 @@ import calendar
 import socket
 import ssl
 import json
+import sys
 import urllib.request
 import time
 import logging
 
-logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p',level= logging.INFO)
-
+logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.INFO)
 
 
 # Description: Method is used to save the JSON received by Curl to  a .txt file.
@@ -43,7 +43,6 @@ def sendJsontoApp2(JsonToSend):
                                    ca_certs="server.crt",
                                    cert_reqs=ssl.CERT_REQUIRED)
 
-
         ssl_sock.connect(('localhost', 8080))
 
         ssl_sock.send(bytes(JsonToSend, "utf-8"))
@@ -54,19 +53,20 @@ def sendJsontoApp2(JsonToSend):
         logging.error('DEBUG: Exception has been thrown')
         ssl_sock.close()
 
-    
     with open('curlApp1.json', 'w') as outFile:
-            jsonObj = outFile.write(json.dumps(url))
+        jsonObj = outFile.write(json.dumps(url))
 
     with open('curlApp1.json', 'r') as json_data:
-            pyObj = json.load(json_data)
-            print(repr(pyObj))    
+        pyObj = json.load(json_data)
+        print(repr(pyObj))
 
-# Description: This method uses CURL to pull JSON payloads from a URL.
-# Param: None
-# Returns: Payload from CURL(Bulk or single at a time?)
+        # Description: This method uses CURL to pull JSON payloads from a URL.
+        # Param: None
+        # Returns: Payload from CURL(Bulk or single at a time?)
+
+
 def getJsonPayload():
-    jsonString = """{"name": "Dylan","lastName": "Palaia","age": 25,"graduated": true, "balance": null}"""
+    # jsonString = """{"name": "Dylan","lastName": "Palaia","age": 25,"graduated": true, "balance": null}"""
 
     url = 'https://jsonplaceholder.typicode.com'
     param = '/post/1/comments'
@@ -78,26 +78,24 @@ def getJsonPayload():
         JsonPayload = response.read()
         # print('Payload: ', JsonPayload)
 
-    except ImportError:
-        e = sys.exc_info()[0]
+    except Exception as e:
+        print(e)
         print("DEBUG: error: %s" % e)
-
+        print("Something went wrong with getting the curl payload")
     return JsonPayload
 
 
 # Replacement for curl method
 def getJsonPayloadtwo():
-    
     try:
         url = 'https://jsonplaceholder.typicode.com'
         param = '/posts/1'
         response = urllib.request.urlopen(url + param)
         payLoad = response.read()
-        
+
     except Exception as e:
         print(e)
-   
-        
+
     return payLoad  # ======================Below are several time related functions================
 
 
@@ -151,7 +149,8 @@ try:
     jsonObject = json.loads(getJsonPayload())
 
     # Add the time stamp in seconds to the JSON object.
-    jsonObject['date'] = gettimeinSeconds()
+    # TODO This is where we need to look through the payloads and append the timestamp individually.
+    # jsonObject['date'] = gettimeinSeconds()
 
     # Print/Show the Json with time stamp in pretty format.
     print(jsonObject)
