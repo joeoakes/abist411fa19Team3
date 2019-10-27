@@ -13,9 +13,7 @@ import calendar
 import socket
 import ssl
 import json
-import urllib.parse
 import urllib.request
-import sys
 import time
 import logging
 
@@ -70,21 +68,21 @@ def sendJsontoApp2(JsonToSend):
 def getJsonPayload():
     jsonString = """{"name": "Dylan","lastName": "Palaia","age": 25,"graduated": true, "balance": null}"""
 
-    url = 'https://jsonplaceholder.typicode.com/posts/1/comments'
-    param = 'comments'
+    url = 'https://jsonplaceholder.typicode.com'
+    param = '/post/1/comments'
 
     try:
         print("DEBUG: Getting payload from CURL")
         print('DEBUG: Url: ', url + param)
         response = urllib.request.urlopen(url + param)
         JsonPayload = response.read()
-        print('Payload: ', JsonPayload)
+        # print('Payload: ', JsonPayload)
 
     except ImportError:
         e = sys.exc_info()[0]
         print("DEBUG: error: %s" % e)
 
-    return jsonString
+    return JsonPayload
 
 
 # Replacement for curl method
@@ -150,7 +148,7 @@ try:
     # saveJsonTotxtFile()
 
     # Convert the string received by CURL to a Python Object
-    jsonObject = json.loads(getJsonPayloadtwo())
+    jsonObject = json.loads(getJsonPayload())
 
     # Add the time stamp in seconds to the JSON object.
     jsonObject['date'] = gettimeinSeconds()
