@@ -6,7 +6,7 @@ import logging
 # logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
 # logging('App2 has begun')
-
+def connectionToApp1():
 try:
     print("create an INET, STREAMing socket using SSL")
     diamondSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -21,8 +21,8 @@ try:
     while True:
         print("accept connections from outside")
         (clientsocket, address) = ssl_sock.accept()
-
         message = clientsocket.recv(1024)
+
         print("Message received")
         print(message)
 
@@ -34,3 +34,6 @@ except Exception as e:
     print(e)
     ssl_sock.close()
 
+def sftpSender():
+    
+def hmacHasher():
