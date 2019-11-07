@@ -84,6 +84,7 @@ def sftpSender():
 try:
     
     payloadFromApp1()
+    sftpSender()
 
 except Exception as e:
     print(e)
