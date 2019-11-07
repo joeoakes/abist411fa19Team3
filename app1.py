@@ -9,6 +9,7 @@
 # Last Date Changed: 10/17/2019
 # Rev: 3.3
 
+
 import calendar
 import socket
 import ssl
@@ -29,30 +30,30 @@ def saveJsonTotxtFile():
     outfile.close()
     logging.info('DEBUG: JSON string saved to Text File')
 
+    json_data = open('jsonPayload.txt', 'r')
+    pyObj = json.loads(json_data)
+    print(repr(pyObj))
+
 
 # Description: This method uses SSL sockets to as a client to send the JSON to App2.
 # Param: Accepts payload
 # Returns: None
-def sendJsontoApp2(JsonToSend):
+def sendJsontoApp2():
+    
     try:
-        JsonToSend = JsonToSend
         print("DEBUG: Client connecting on port 8080 using SSL")
         diamondSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        ssl_sock = ssl.wrap_socket(diamondSock,
-                                   ca_certs="server.crt",
-                                   cert_reqs=ssl.CERT_REQUIRED)
-        ssl_sock.connect(('localhost', 8080))
-        ssl_sock.send(bytes(JsonToSend, "utf-8"))
+        c_ssl = ssl.wrap_socket(diamondSock,
+                                ca_certs="server.crt",
+                                cert_reqs=ssl.CERT_REQUIRED)
+        c_ssl.connect(('localhost', 8080))
+        c_ssl.send(bytes(jsonList, 'utf - 8'))
         logging.info('DEBUG: Object sent to Application 2')
     except Exception as e:
         print(e)
-        print(ssl_sock.cipher())
+        print(c_ssl.cipher())
         logging.error('DEBUG: Exception has been thrown')
-        ssl_sock.close()
-
-    with open('jsonPayload.txt', 'r') as json_data:
-        pyObj = json.loads(json_data)
-        print(repr(pyObj))
+        c_ssl.close()
 
     # Description: This method uses CURL to pull JSON payloads from a URL.
     # Param: None
@@ -133,21 +134,23 @@ try:
 
     # Convert the string received by CURL to a Python Object
     jsonList = json.loads(getJsonPayload())
+
     # Add the time stamp in seconds to the JSON object.
     # TODO This is where we need to look through the payloads and append the timestamp individually.
     # Desciption: Loop adds a timestamp to each of the elements in the list
-    # Author: CiearaParker
+    # Author: Cieara Parker
     # Param: None
     # Returns: None
     for i in jsonList:
         i['date'] = gettimeinSeconds()
-        print(i)
-    # jsonObject['date'] = gettimeinSeconds()
-    # Print/Show the Json with time stamp in pretty format.
-    # print(len(jsonList))
-    # print(jsonList)
-
-
+    sendJsontoApp2()
+    print(jsonList)
+    # jsonPayload = json.loads(sendJsontoApp2())
+# jsonObject['date'] = gettimeinSeconds()
+# Print/Show the Json with time stamp in pretty format.
+# print(len(jsonList))
+# print(jsonList)
 
 except Exception as e:
     print(e)
+
