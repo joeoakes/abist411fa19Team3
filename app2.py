@@ -1,11 +1,9 @@
 import socket
 import ssl
-import json
 import logging
 import pysftp
 import hashlib
 import sys
-
 
 # logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
@@ -14,6 +12,8 @@ import sys
 # Description: Receives the payload through TLS from App1.
 # Param: None
 # Returns: None
+from app1 import jsonList
+
 
 def payloadFromApp1():
     try:
@@ -37,6 +37,7 @@ def payloadFromApp1():
             print(message)
 
             logging.info('Message has been received by app2')
+
             strJson = message.decode("utf-8")
             print(strJson)
 
@@ -44,19 +45,21 @@ def payloadFromApp1():
         print(e)
         ssl_sock.close()
 
+
 # Description: Takes the payload and hashes it, appending it to a message.
 # Param: None
 # Returns: None
 
 def hmacHasher():
     try:
-        data = '{"payload":"hashLab"}'
+        data = jsonList
         checksum = hashlib.sha256(data.encode()).hexdigest()
         print("Message has been hashed")
     except Exception as e:
         print(e)
         print("Log exception: ", sys.exc_info()[0])
-        
+
+
 # Description: Sends the payload to a server through SFTP for App3 to receive. 
 # Param: None
 # Returns: None
@@ -79,14 +82,15 @@ def sftpSender():
         print(e)
         print("Log exception 2:", sys.exc_info()[0])
 
-# Main method begins
 
 try:
-    
+
     payloadFromApp1()
+    hmacHasher()
     sftpSender()
 
 except Exception as e:
     print(e)
 
 # logging ('App2 has ended')
+

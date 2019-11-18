@@ -38,7 +38,8 @@ def saveJsonTotxtFile():
 # Description: This method uses SSL sockets to as a client to send the JSON to App2.
 # Param: Accepts payload
 # Returns: None
-def sendJsontoApp2():
+def sendJsontoApp2(jsonList):
+    jsonList = jsonList
     try:
         print("DEBUG: Client connecting on port 8080 using SSL")
         diamondSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -144,7 +145,7 @@ try:
         i['date'] = gettimeinSeconds()
         i['date'] = formatDateToHumanReadable()
 
-    sendJsontoApp2()
+    sendJsontoApp2(jsonList)
     print(jsonList)
     # jsonPayload = json.loads(sendJsontoApp2())
 # jsonObject['date'] = gettimeinSeconds()
