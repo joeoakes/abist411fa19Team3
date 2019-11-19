@@ -30,10 +30,6 @@ def saveJsonTotxtFile():
     outfile.close()
     logging.info('DEBUG: JSON string saved to Text File')
 
-    json_data = open('jsonPayload.txt', 'r')
-    pyObj = json.loads(json_data)
-    print(repr(pyObj))
-
 
 # Description: This method uses SSL sockets to as a client to send the JSON to App2.
 # Param: Accepts payload
@@ -145,7 +141,7 @@ try:
         i['date'] = gettimeinSeconds()
         i['date'] = formatDateToHumanReadable()
 
-    sendJsontoApp2(jsonList)
+    sendJsontoApp2()
     print(jsonList)
     # jsonPayload = json.loads(sendJsontoApp2())
 # jsonObject['date'] = gettimeinSeconds()
