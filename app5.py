@@ -1,36 +1,46 @@
 import logging
 from logging.config import fileConfig
+
 from pymongo import MongoClient
 import sys
-import pdb 
+import pdb
+import socket
+import logging.handlers
+logging.basicConfig(level = logging.INFO, format='%(asctime)s - %(message)s', datefmt='%m/%d/%Y %$')
+
+#logMessages = logging.config.listen()
 
 
 
-logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+logInfo = ' '
+
+#Opdb.set_trace()
+serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+serversocket.bind(('localhost', 9999))
+serversocket.listen(5)
 
 
-logMessages = logging.config.listen()
-
-
-pdb.set_trace()
-
-
-try:  
- client = MongoClient('localhost', 27017)   
- print("Connected to MongoDB")   
-
- db = client.dbTeam3   
- print("Got the Database module4_dbTeam3")   
-
- collection = db.logMessages 
- print("Got the Collection payloadLogMessages")   
  
- print("Created the Document object")   
- response= logMessages 
+#Root logger 
+logger = logging.getLogger('app5') 
 
- post_id = collection.insert(response)
- print (post_id)
-except:   
- e = sys.exc_info()[0]   
- print("error: %s" % e)
+stream_handler = logging.StreamHandler() 
+stream_handler.setLevel(logging.INFO)
+#pdb.set_trace() 
+logger.addHandler(stream_handler) 
 
+
+
+
+try: 
+	logging.info('Test') 
+	while True: 
+			(clientsocket,address) = serversocket.accept()
+			logInfo = clientsocket.recv(1024).decode()
+			if logInfo != ' ':
+				logging.info(logInfo) 
+				logInfo = ' '
+	
+except Exception as e: 
+		print(e) 
+		logging.config.stopListening() 
