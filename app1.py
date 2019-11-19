@@ -26,7 +26,7 @@ def saveJsonTotxtFile():
     outfile = open('jsonPayload.txt', 'w')
     json.dump(getJsonPayload(), outfile)
     outfile.close()
-    logging.info('DEBUG: JSON string saved to Text File')
+    logging.info(' JSON string saved to Text File')
 
 
 # Description: This method uses SSL sockets to as a client to send the JSON to App2.
@@ -41,7 +41,7 @@ def sendJsontoApp2():
                                 cert_reqs=ssl.CERT_REQUIRED)
         c_ssl.connect(('localhost', 8080))
         c_ssl.send(bytes(jsonList, 'utf - 8'))
-        logging.info('DEBUG: Object sent to Application 2')
+        logging.info('Object sent to Application 2')
     except Exception as e:
         print(e)
         print(c_ssl.cipher())
