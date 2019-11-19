@@ -13,6 +13,7 @@ import hashlib
 import sys
 import logging
 
+
 logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
 
@@ -42,13 +43,13 @@ def payloadFromApp1():
             print("Message received: ", message)
 
             logging.info('Message has been received by app2')
+            ssl_sock.close()
 
-            strJson = message.decode("utf-8")
+            strJson = message.encode("utf-8")
             print(strJson)
 
     except Exception as e:
         print(e)
-        ssl_sock.close()
 
 
 # Description: Takes the payload and hashes it, appending it to a message.
@@ -57,10 +58,12 @@ def payloadFromApp1():
 
 def hmacHasher():
     try:
+        print("Message has been hashed")
         from app1 import jsonList
         data = jsonList
         checksum = hashlib.sha256(data.encode()).hexdigest()
-        print("Message has been hashed")
+        print("sha256: ", checksum)
+
     except Exception as e:
         print(e)
         print("Log exception: ", sys.exc_info()[0])
@@ -88,12 +91,11 @@ def sftpSender():
 
 try:
     payloadFromApp1()
-    sftpSender()
     hmacHasher()
+    sftpSender()
 
 
 except Exception as e:
     print(e)
 
 # logging ('App2 has ended')
-

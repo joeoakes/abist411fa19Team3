@@ -18,8 +18,6 @@ import urllib.request
 import time
 import logging
 
-logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.INFO)
-
 
 # Description: Method is used to save the JSON received by Curl to  a .txt file.
 # Param: uses getJsonPayload() to get the Json to save. (May be changed to a parameter)
@@ -34,8 +32,7 @@ def saveJsonTotxtFile():
 # Description: This method uses SSL sockets to as a client to send the JSON to App2.
 # Param: Accepts payload
 # Returns: None
-def sendJsontoApp2(jsonList):
-    jsonList = jsonList
+def sendJsontoApp2():
     try:
         print("DEBUG: Client connecting on port 8080 using SSL")
         diamondSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -51,10 +48,10 @@ def sendJsontoApp2(jsonList):
         logging.error('DEBUG: Exception has been thrown')
         c_ssl.close()
 
-    # Description: This method uses CURL to pull JSON payloads from a URL.
-    # Param: None
-    # Returns: Payload from CURL(Bulk or single at a time?)
 
+# Description: This method uses CURL to pull JSON payloads from a URL.
+# Param: None
+# Returns: Payload from CURL(Bulk or single at a time?)
 
 def getJsonPayload():
     # jsonString = """{"name": "Dylan","lastName": "Palaia","age": 25,"graduated": true, "balance": null}"$
@@ -78,7 +75,6 @@ def getJsonPayload():
 
 
 # ======================Below are several time related functions================
-
 
 # Description: A tuple is similar to a list of values.
 # Its needed here because a tuple is required to get the time stamp as seconds
@@ -123,7 +119,6 @@ def formatDateToHumanReadable():
 # Param: None
 # Returns: None
 
-
 try:
     # Save the Payload to a file.
     # saveJsonTotxtFile()
@@ -143,12 +138,9 @@ try:
 
     sendJsontoApp2()
     print(jsonList)
-    # jsonPayload = json.loads(sendJsontoApp2())
+
 # jsonObject['date'] = gettimeinSeconds()
 # Print/Show the Json with time stamp in pretty format.
-# print(len(jsonList))
-# print(jsonList)
 
 except Exception as e:
     print(e)
-
