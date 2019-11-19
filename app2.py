@@ -59,8 +59,8 @@ def payloadFromApp1():
 def hmacHasher():
     try:
         print("Message has been hashed")
-        from app1 import jsonList
-        data = jsonList
+        from clientssl import JsonPayload
+        data = JsonPayload
         checksum = hashlib.sha256(data.encode()).hexdigest()
         print("sha256: ", checksum)
 
