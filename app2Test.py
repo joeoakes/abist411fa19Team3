@@ -58,8 +58,8 @@ class TestApp2(unittest.TestCase):
 
     def hmacHasher():
         try:
-            from app1 import jsonList
-            data = jsonList
+            from clientssl import JsonPayload
+            data = JsonPayload
             checksum = hashlib.sha256(data.encode()).hexdigest()
             print("Message has been hashed")
         except Exception as e:
