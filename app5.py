@@ -8,11 +8,18 @@ import socket
 import logging.handlers
 logging.basicConfig(level = logging.INFO, format='%(asctime)s - %(message)s', datefmt='%m/%d/%Y %$')
 
+
 #logMessages = logging.config.listen()
 
 
 
 logInfo = ' '
+
+
+
+logMessages = logging.config.listen()
+logMessages.start()
+
 
 #Opdb.set_trace()
 serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
