@@ -1,1 +1,37 @@
+import urllib.request
+import json
+import time
+import logging
 
+def getJsonPayload():
+    url = 'https://jsonplaceholder.typicode.com'
+    param = '/post/1/comments'
+
+    try:
+        print("DEBUG: Getting payload from CURL")
+        print('DEBUG: Url: ', url + param)
+        response = urllib.request.urlopen(url + param)
+        JsonPayload = response.read()
+        # print('Payload: ', JsonPayload)
+
+    except Exception as e:
+        print(e)
+        print("DEBUG: error: %s" % e)
+        print("Something went wrong with getting the curl payload")
+
+    return JsonPayload
+
+try:
+    jsonList = json.loads(getJsonPayload())
+
+    for i in jsonList:
+        i['date'] = gettimeinSeconds()
+        i['date'] = formatDateToHumanReadable()
+
+    sendJsontoApp2()
+    print(jsonList)
+
+  
+
+except Exception as e:
+    print(e)
