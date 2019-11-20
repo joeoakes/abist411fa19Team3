@@ -6,22 +6,18 @@
 # Date Developed: 11/18/2019
 # Last Date Changed: 11/18/2019
 
+import hashlib
+import hmac
 import socket
 import ssl
 import pysftp
-import hashlib
 import sys
 import logging
 
 
-logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.INFO)
 
 
-# logging('App2 has begun')
-
-# Description: Receives the payload through TLS from App1.
-# Param: None
-# Returns: None
 def payloadFromApp1():
     try:
         print("create an INET, STREAMing socket using SSL")
@@ -39,35 +35,22 @@ def payloadFromApp1():
             print("accept connections from outside")
             (c_ssl, address) = ssl_sock.accept()
             message = c_ssl.recv(157778)
-
             print("Message received: ", message)
-
             logging.info('Message has been received by app2')
-            ssl_sock.close()
 
-            strJson = message.encode("utf-8")
+            key = "5411"
+            key = bytes(key, 'UTF-8')
+            strJson = hmac.new(key, message, hashlib.sha256).hexdigest()
+            print("Message has been hashed")
+            logging.info('Message has been encoded')
             print(strJson)
-
-    except Exception as e:
-        print(e)
-
-
-# Description: Takes the payload and hashes it, appending it to a message.
-# Param: None
-# Returns: None
-
-def hmacHasher():
-    try:
-        print("Message has been hashed")
+        ssl_sock.close()
 
     except Exception as e:
         print(e)
         print("Log exception: ", sys.exc_info()[0])
+        logging.error('DEBUG: Exception has been thrown')
 
-
-# Description: Sends the payload to a server through SFTP for App3 to receive.
-# Param: None
-# Returns: None
 
 def sftpSender():
     cnopts = pysftp.CnOpts()
@@ -79,19 +62,21 @@ def sftpSender():
             print("Connection made")
             print("Sending jsonPayload.json file")
             sftp.put('jsonPayload.json')
+            logging.info('Message has been sent to app3')
 
     except Exception as e:
         print(e)
         print("Log exception 1:", sys.exc_info()[0])
+        logging.error('DEBUG: Exception has been thrown')
 
 
 try:
-    payloadFromApp1()
-    hmacHasher()
     sftpSender()
-
-
+    payloadFromApp1()
+    
 except Exception as e:
     print(e)
+    logging.error('DEBUG: Exception has been thrown')
 
-# logging ('App2 has ended')
+
+
