@@ -1,5 +1,5 @@
 import sys, datetime 
-from pymongo imort MongoClient 
+from pymongo import MongoClient 
 
 def connectToDB():
 	client = MongoClient('localhost',27017)
