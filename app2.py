@@ -14,11 +14,14 @@ import pysftp
 import sys
 import logging
 
-
 logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.INFO)
 
 
 def payloadFromApp1():
+    cnopts = pysftp.CnOpts()
+    cnopts.hostkeys = None
+    cinfo = {'cnopts': cnopts, 'host': 'oz-ist-linux-oakes', 'username': 'ftpuser', 'password': 'test1234', 'port': 100}
+
     try:
         print("create an INET, STREAMing socket using SSL")
         diamondSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -44,39 +47,23 @@ def payloadFromApp1():
             print("Message has been hashed")
             logging.info('Message has been encoded')
             print(strJson)
-        ssl_sock.close()
+            with pysftp.Connection(**cinfo) as sftp:
+                print("Connection made")
+                print("Sending jsonPayload.json file")
+                sftp.put('jsonPayload.json')
+                logging.info('Message has been sent to app3')
 
     except Exception as e:
         print(e)
+        ssl_sock.close()
         print("Log exception: ", sys.exc_info()[0])
         logging.error('DEBUG: Exception has been thrown')
 
 
-def sftpSender():
-    cnopts = pysftp.CnOpts()
-    cnopts.hostkeys = None
-    cinfo = {'cnopts': cnopts, 'host': 'oz-ist-linux-oakes', 'username': 'ftpuser', 'password': 'test1234', 'port': 100}
-
-    try:
-        with pysftp.Connection(**cinfo) as sftp:
-            print("Connection made")
-            print("Sending jsonPayload.json file")
-            sftp.put('jsonPayload.json')
-            logging.info('Message has been sent to app3')
-
-    except Exception as e:
-        print(e)
-        print("Log exception 1:", sys.exc_info()[0])
-        logging.error('DEBUG: Exception has been thrown')
-
-
 try:
-    sftpSender()
     payloadFromApp1()
-    
+
 except Exception as e:
     print(e)
     logging.error('DEBUG: Exception has been thrown')
-
-
 
