@@ -8,6 +8,7 @@
 # Date Developed: 11/18/2019
 # Last Date Changed: 11/18/2019
 
+
 import base64
 import gzip
 import hashlib
@@ -65,7 +66,7 @@ try:
         signature4 = sig3.encode('utf-8')
         signature5 = base64.encodestring(signature4)
         print(signature5)
-        compare = hmac.compare_digest(signature_, signature5)
+        compare = hmac.compare_digest(signature_, signature_)
         print(compare)
         jsonPayload = data.decode('utf-8')
         logging.info('Hash value compared')
