@@ -17,6 +17,9 @@ import logging
 logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.INFO)
 
 
+# Description: Receives the payload through TLS from App1, hashes the payload and then places it in a secure server through STFP for App 3 to recieve.
+# Param: None
+# Returns: None
 def payloadFromApp1():
     cnopts = pysftp.CnOpts()
     cnopts.hostkeys = None
