@@ -16,16 +16,23 @@ import logging
 
 logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.INFO)
 
+# Description: Makes and returns timestamp in seconds
+# Param: None
+# Returns: Time in Seconds(Int)
 def timeInSeconds():
     times = time.time()
     return times
 
-
+# Description: Create a formatted timestamp, returns string for a formatted date (month, day, year).
+# Param: None
+# Returns: Sring
 def formatDate():
     formatted = time.strftime("%Y-%m-%d %H:%M:%S", timeInTuple())
     return formatted
 
-
+# Description: A tuple is required to get the time stamp as seconds and to format it in human readable form.
+# Param: None
+# Returns: Tuple
 def timeInTuple():
     tuple = time.gmtime()
     return tuple
