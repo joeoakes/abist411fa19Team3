@@ -6,6 +6,14 @@
 # Date Developed: 11/18/2019
 # Last Date Changed: 11/18/2019
 
+
+# Project: App2 Test - Project Diamond
+# Purpose Details: Testing if App 2 complies and runs.
+# Course: IST 411
+# Author: Cieara Parker
+# Date Developed: 11/18/2019
+# Last Date Changed: 11/18/2019
+
 import socket
 import ssl
 import sys
@@ -16,6 +24,7 @@ import logging
 
 logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.INFO)
 
+
 # Description: Makes and returns timestamp in seconds
 # Param: None
 # Returns: Time in Seconds(Int)
@@ -23,12 +32,14 @@ def timeInSeconds():
     times = time.time()
     return times
 
+
 # Description: Create a formatted timestamp, returns string for a formatted date (month, day, year).
 # Param: None
 # Returns: Sring
 def formatDate():
     formatted = time.strftime("%Y-%m-%d %H:%M:%S", timeInTuple())
     return formatted
+
 
 # Description: A tuple is required to get the time stamp as seconds and to format it in human readable form.
 # Param: None
@@ -45,12 +56,17 @@ try:
     print('Url: ', url + param)
     response = urllib.request.urlopen(url + param)
     JsonPayload = response.read()
+    
+    # Description: creates a post to add to the log for each logging event occurred
+    # Param: None
+    # Returns: None
     def timeLog():
         post = {}
         post['date'] = timeInSeconds()
         post['date'] = formatDate()
         logging.insert(post)
         logging.info('Timestamp added to payload')
+
 
     print("Client connecting on port 8080 using SSL")
     diamondSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
