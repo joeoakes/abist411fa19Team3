@@ -15,18 +15,12 @@ import logging
 import unittest
 
 
-logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.INFO)
 
 
 class TestApp2(unittest.TestCase):
 
-    # logging('App2 has begun')
-
-    # Description: Receives the payload through TLS from App1.
-    # Param: None
-    # Returns: None
-    def payloadFromApp1():
-        try:
+    def test_sample(self):
+        
             print("create an INET, STREAMing socket using SSL")
             diamondSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             ssl_sock = ssl.wrap_socket(diamondSock,
@@ -53,38 +47,20 @@ class TestApp2(unittest.TestCase):
                 print(strJson)
             ssl_sock.close()
 
-        except Exception as e:
-            print(e)
-            print("Log exception: ", sys.exc_info()[0])
-            logging.error('DEBUG: Exception has been thrown')
-
-    def sftpSender():
+  
+     def test2_sample(self):
         cnopts = pysftp.CnOpts()
         cnopts.hostkeys = None
         cinfo = {'cnopts': cnopts, 'host': 'oz-ist-linux-oakes', 'username': 'ftpuser', 'password': 'test1234',
                  'port': 100}
 
-        try:
             with pysftp.Connection(**cinfo) as sftp:
                 print("Connection made")
                 print("Sending jsonPayload.json file")
                 sftp.put('jsonPayload.json')
-                logging.info('Message has been sent to app3')
+  
 
-        except Exception as e:
-            print(e)
-            print("Log exception 1:", sys.exc_info()[0])
-            logging.error('DEBUG: Exception has been thrown')
-
-    try:
-        sftpSender()
-        payloadFromApp1()
-
-    except Exception as e:
-        print(e)
-        logging.error('DEBUG: Exception has been thrown')
-
-    # logging ('App2 has ended')
+ 
 
 
 if __name__ == '__main__':
