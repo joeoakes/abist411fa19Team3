@@ -20,8 +20,8 @@ try:
     channel = connection.channel()
     print("Channel Connected")
     channel.queue_declare(queue='ist411')
-    channel.basic_publish(exchange='', routing_key='ist411', body='payloadSendParker.json')
-    print(" [x] Sent 'payloadSendParker.json'")
+    channel.basic_publish(exchange='', routing_key='ist411', body='jsonPayload.json')
+    print(" [x] Sent 'jsonPayload.json'")
     connection.close()
 
 except Exception as e:
