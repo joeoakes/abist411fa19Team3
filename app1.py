@@ -20,6 +20,7 @@ import sys
 import json
 import urllib.request
 import time
+import pika
 import logging
 
 logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.INFO)
@@ -56,7 +57,8 @@ try:
     print('Url: ', url + param)
     response = urllib.request.urlopen(url + param)
     JsonPayload = response.read()
-    
+
+
     # Description: creates a post to add to the log for each logging event occurred
     # Param: None
     # Returns: None
@@ -77,11 +79,33 @@ try:
     c_ssl.send(JsonPayload)
     logging.info('Object sent to Application 2')
 
+    print("Connection to localhost")
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+    channel = connection.channel()
+    print("Queue ist411 created")
+    channel.queue_declare(queue='ist411')
+    logging.info('ist411 queue created')
+
+
+    # Description: callback function that will receive the message
+    # Param: None
+    # Returns: None
+    def callback(ch, method, properties, body):
+        print(" [x] Received %r" % body)
+        logging.info('Message received')
+
+
+    channel.basic_consume(queue='ist411', on_message_callback=callback, auto_ack=True)
+    print(' [*] Waiting for messages. To exit press CTRL+C')
+    channel.start_consuming()
+
+
+
 except Exception as e:
     print(e)
-    print(c_ssl.cipher())
-    logging.error('DEBUG: Exception has been thrown')
-    c_ssl.close()
+print(c_ssl.cipher())
+logging.error('DEBUG: Exception has been thrown')
+c_ssl.close()
 
 with open('jsonPayload.json', 'w') as outFile:
     jsonObj = outFile.write(json.dumps(url))
