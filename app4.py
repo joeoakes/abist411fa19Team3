@@ -10,7 +10,7 @@ import pika
 
 try:
     uri = input("What is the Pyro uri of the greeting object?").strip()
-    name = input("What is your name?").strip()
+    name = input("What is the name of the .json file?").strip()
 
     greeting_maker = Pyro4.Proxy(uri)
     print(greeting_maker.get_fortune(name))
