@@ -57,12 +57,12 @@ try:
         setKey = "5411"
         setKey = bytes(setKey, 'UTF-8')
         signature = hmac.new(setKey, data, hashlib.sha256).hexdigest()
-        print("Signature created (sha256): ", signature)
+        print("Signature 1 (sha256): ", signature)
         sig1 = signature.encode('utf8')
         signature_ = base64.encodestring(sig1)
-        print("Signature 2 created (sha256): ", signature)
+        print("Signature 2 (sha256): ", signature)
         print()
-        sig3 = input("Hashed file from App 2: ")
+        sig3 = input("Signature from App2: ")
         signature4 = sig3.encode('utf-8')
         signature5 = base64.encodestring(signature4)
         print(signature5)
@@ -105,6 +105,7 @@ try:
         uri = daemon.register(GreetingMaker)
         print("Ready. Object uri = ", uri)
         daemon.requestLoop()
+        logging.info('Pyro connected')
 except Exception as e:
     print(e)
     print("Log exception 2:", sys.exc_info()[0])
