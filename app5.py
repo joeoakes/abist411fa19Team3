@@ -1,3 +1,10 @@
+# Project: App5 - Project Diamond
+# Purpose Details: Gathers all the logging information and sends it to the MongoDB.
+# Course: IST 411
+# Author: Jinal Parmar
+# Date Developed: 11/18/2019
+# Last Date Changed: 11/18/2019
+
 import logging
 from logging.config import fileConfig
 
