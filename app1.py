@@ -115,3 +115,14 @@ with open('jsonPayload.json', 'r') as json_data:
     pyObj = json.load(json_data)
     print(repr(pyObj))
 
+def listenForPayload(self):
+		connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+		channel = connection.channel()
+
+		channel.queue_declare(queue='ist411')
+
+		#The message is parsed and decrypted
+		def callback(ch, method, properties, body):
+			aesObj  = AES.new('This is a key123', AES.MODE_CBC, 'This is an IV456')
+			payload  = aesObj.decrypt(body)
+			print("App1 recieved %r" %payload)
