@@ -1,16 +1,18 @@
-# Project: Project Diamond
-# Purpose Details: Application five takes the log requests from all the apps and logs them into a database 
+
+
+
+
+
+
+
+=======
+# Project: App5 - Project Diamond
+# Purpose Details: Gathers all the logging information and sends it to the MongoDB.
 # Course: IST 411
 # Author: Jinal Parmar
-# Date Developed: 10/11/2019
-# Last Date Changed: 11/19/2019
-# Rev: 3.3
-
-
-
-
-
-
+# Date Developed: 11/18/2019
+# Last Date Changed: 11/18/2019
+>>>>>>> 40b55d91cda51b00f57be01952e4a62582054271
 
 import logging
 from logging.config import fileConfig
