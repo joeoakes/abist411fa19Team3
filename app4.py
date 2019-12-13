@@ -9,20 +9,9 @@ from  Crypto.Cipher import AES
 import Pyro4
 import zlib
 import sys 
-)
 
-class AES: 
-	def encryptAES(self, payload) 
-	try: 
 
-		pad = b ' '
-		obj = AES.new('This is a key', AES.MOD_CBC, 'This is an IV456')
-		length = 16 -(len(payload)%16) 
-		payload += length *pad 
-		ciphertext = object.encrypt(payload)
-		return ciphertext
-	except Exception as e: 
-		print (e) 
+
 =======
 #Last Date Changed: 11/18/2019
 
@@ -48,3 +37,15 @@ try:
 except Exception as e:
     print(e)
 
+class AES: 
+	def encryptAES(self, payload) 
+	try: 
+
+		pad = b ' '
+		obj = AES.new('This is a key', AES.MOD_CBC, 'This is an IV456')
+		length = 16 -(len(payload)%16) 
+		payload += length *pad 
+		ciphertext = object.encrypt(payload)
+		return ciphertext
+	except Exception as e: 
+		print (e) 
