@@ -17,25 +17,26 @@ import sys
 
 import Pyro4
 import pika
+def rabbitMQ(self)
 
-try:
-    uri = input("What is the Pyro uri of the greeting object?").strip()
-    name = input("What is the name of the .json file?").strip()
+	try:
+    		uri = input("What is the Pyro uri of the greeting object?").strip()
+    		name = input("What is the name of the .json file?").strip()
 
-    greeting_maker = Pyro4.Proxy(uri)
-    print(greeting_maker.get_fortune(name))
+    		greeting_maker = Pyro4.Proxy(uri)
+    		print(greeting_maker.get_fortune(name))
 
-    print("Connecting to Localhoast Queue")
-    connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
-    channel = connection.channel()
-    print("Channel Connected")
-    channel.queue_declare(queue='ist411')
-    channel.basic_publish(exchange='', routing_key='ist411', body='jsonPayload.json')
-    print(" [x] Sent 'jsonPayload.json'")
-    connection.close()
+    		print("Connecting to Localhoast Queue")
+    		connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+    		channel = connection.channel()
+    		print("Channel Connected")
+    		channel.queue_declare(queue='ist411')
+    		channel.basic_publish(exchange='', routing_key='ist411', body='jsonPayload.json')
+   		print(" [x] Sent 'jsonPayload.json'")
+    		connection.close()
 
-except Exception as e:
-    print(e)
+	except Exception as e:
+    		print(e)
 
 class AES: 
 	def encryptAES(self, payload) 
